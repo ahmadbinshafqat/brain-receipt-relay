@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Receipt Relay</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">finance-lite MVP</p>
+          <h1>Receipt Relay</h1>
+          <p class="subtitle">Paste or upload a receipt and get clean expense data with merchant, totals, tax, tip, and line items.</p>
+        </div>
+      </section>
+
+      <section class="card input-card">
+        <form id="receiptForm">
+          <label for="text">Paste receipt text</label>
+          <textarea id="text" name="text" rows="12" placeholder="SUNRISE MARKET\n2025-01-03\nCoffee 3.50\nBagel 2.75\nSubtotal 6.25\nTax 0.52\nTip 1.00\nTotal 7.77"></textarea>
+
+          <div class="upload-row">
+            <div>
+              <label for="image">Or upload receipt image</label>
+              <input id="image" name="image" type="file" accept="image/*" />
+            </div>
+            <button type="button" id="sampleBtn">Use sample</button>
+          </div>
+
+          <button class="primary" type="submit">Parse receipt</button>
+          <p id="status" class="status"></p>
+        </form>
+      </section>
+
+      <section id="resultCard" class="card result-card hidden">
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">parsed result</p>
+            <h2 id="merchant">Merchant</h2>
+            <p id="meta"></p>
+          </div>
+          <div class="actions">
+            <button id="copyBtn" type="button">Copy JSON</button>
+            <button id="csvBtn" type="button">Download CSV</button>
+          </div>
+        </div>
+
+        <div class="totals-grid">
+          <div><span>Subtotal</span><strong id="subtotal">—</strong></div>
+          <div><span>Tax</span><strong id="tax">—</strong></div>
+          <div><span>Tip</span><strong id="tip">—</strong></div>
+          <div><span>Total</span><strong id="total">—</strong></div>
+        </div>
+
+        <h3>Line items</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Qty</th><th>Unit</th><th>Amount</th></tr></thead>
+            <tbody id="items"></tbody>
+          </table>
+        </div>
+
+        <details>
+          <summary>Raw text</summary>
+          <pre id="rawText"></pre>
+        </details>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
